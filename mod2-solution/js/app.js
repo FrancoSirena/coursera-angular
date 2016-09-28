@@ -1,10 +1,10 @@
 (function(){
 'use strict';
-angular.module('ShoppingListApp', [])
+angular.module('ShoppingApp', [])
 .controller('ToBuyController', ToBuyController)
 .controller('AlreadyBoughtController', AlreadyBoughtController)
-.service('ToBuyService', ShoppingListService)
-.service('BoughtService', ShoppingListService)
+.service('ToBuyService', ListService)
+.service('BoughtService', ListService);
 
 ToBuyController.$inject = ['ToBuyService', 'BoughtService'];
 
@@ -20,13 +20,20 @@ function ToBuyController(ToBuyService, BoughtService){
   toBuy.items = ToBuyService.getItems();
   toBuy.buyItem = function (itemIndex) {
     BoughtService.addItem(toBuy.items[itemIndex].name, toBuy.items[itemIndex].quantity);
+    ToBuyService.removeItem(itemIndex);
   }
+}
 
+AlreadyBoughtController.$inject = ['BoughtService'];
 
+function AlreadyBoughtController(BoughtService){
+  var bought = this;
+
+  bought.items = BoughtService.getItems();
 }
 
 
-function ShoppingListService() {
+function ListService() {
   var service = this;
   var items = [];
 
@@ -46,5 +53,5 @@ function ShoppingListService() {
     return items;
   };
 }
-}
-)
+
+})();
