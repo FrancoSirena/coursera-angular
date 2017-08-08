@@ -1,0 +1,7 @@
+<ul>
+	<li ng-repeat="item in items"> 
+		<h3>{{item.name}} <a href="javascript:void(0)" ng-click="onRemove({arg: $index})"> <i class="glyphicon glyphicon-remove"> </i> </a></h3>
+		<h4> {{item.short_name}} </h4>
+		<p> {{item.description}} </p>
+	</li>
+</ul>
