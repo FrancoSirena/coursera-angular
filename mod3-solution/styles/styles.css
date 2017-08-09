@@ -9,6 +9,9 @@ input[type="text"] {
   float: left;
   margin-left: 10px;
 }
+.padding-10 {
+  padding: 10px;
+}
 .loader {
   
   margin-left: 5px;

@@ -12,7 +12,8 @@ function FoundItemsDirective() {
     scope: {
       items: '<',
       onRemove: '&'
-    }
+    },
+    transclude: true
   }
 }
 
@@ -24,17 +25,23 @@ function NarrowItDownController(MenuSearchService){
   myCtrl.searchTerm = "";
   myCtrl.foundItems = [];
   myCtrl.loading = false;
+  myCtrl.nothingFound = false;
   myCtrl.removeFoundItem = function (index) {
-    console.log("ahsdhasda")
+    myCtrl.foundItems.splice(index, 1);
   }
   myCtrl.getMenuItens = function () {
-    if (!myCtrl.searchTerm)
+    if (!myCtrl.searchTerm) {
+      myCtrl.foundItems = [];
+      myCtrl.nothingFound = true;
       return;
+    }
+    myCtrl.nothingFound = false;
     myCtrl.loading = true;
     myCtrl.foundItems = [];
     MenuSearchService.getMatchedMenuItems(myCtrl.searchTerm).then(function(resp) {
-      myCtrl.foundItems = resp;
       myCtrl.loading= false;
+      myCtrl.nothingFound = resp.length == 0;
+      myCtrl.foundItems = resp;
     });
   }
 }
@@ -43,8 +50,6 @@ MenuSearchService.$inject = ['ApiBasePath','$http'];
 function MenuSearchService(ApiBasePath,$http) {
   var service = this;
   service.getMatchedMenuItems = function (searchTerm) {
-    if(!searchTerm)
-      return null;
     var response = $http({
       method: "GET",
       url: (ApiBasePath + "/menu_items.json")

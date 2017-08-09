@@ -1,7 +1,14 @@
-<ul>
-	<li ng-repeat="item in items"> 
-		<h3>{{item.name}} <a href="javascript:void(0)" ng-click="onRemove({arg: $index})"> <i class="glyphicon glyphicon-remove"> </i> </a></h3>
-		<h4> {{item.short_name}} </h4>
-		<p> {{item.description}} </p>
-	</li>
-</ul>
+
+<div ng-repeat="item in items" class="row table-bordered padding-10"> 
+	<div class="col-md-8 col-sm-9 col-xs-6">
+		<h3>{{item.name}} </h3>
+	</div>
+	<div class="col-md-4 col-sm-3 col-xs-6">
+		<button ng-click="onRemove({arg: $index})" class="btn btn-flat btn-danger pull-right"><i class="glyphicon glyphicon-remove"> </i>Don't want this one!
+		</button>
+	</div>	
+	<div class="clearfix"> </div>
+	<h4> {{item.short_name}} </h4>
+	<p> {{item.description}} </p>
+</div>
+<span ng-transclude> </span>

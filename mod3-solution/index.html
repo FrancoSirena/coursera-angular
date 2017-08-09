@@ -17,7 +17,9 @@
       </div>
       <div class="col-md-7">
         <div class="loader" ng-show="myCtrl.loading"></div>
-        <found-items items="myCtrl.foundItems" on-remove="myCtrl.removeFoundItem(arg)"></found-items>
+        <found-items items="myCtrl.foundItems" on-remove="myCtrl.removeFoundItem(arg)">
+          <span class="text-danger" ng-show="myCtrl.nothingFound">Nothing found</span>
+        </found-items>
       </div>  
     </div>
 
