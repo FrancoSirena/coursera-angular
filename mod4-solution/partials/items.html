@@ -1,0 +1,7 @@
+<h4> {{$ctrl.categoryDetails.category.name}} 
+		<i class="glyphicon glyphicon-list" ng-click="$ctrl.showItems = !$ctrl.showItems"> </i>
+</h4>
+<dl ng-show="$ctrl.showItems">
+	<dt ng-repeat-start="item in $ctrl.categoryDetails.menu_items"> {{item.name}} </dt>
+	<dd ng-repeat-end> {{item.description}} </dd>
+</ul>
