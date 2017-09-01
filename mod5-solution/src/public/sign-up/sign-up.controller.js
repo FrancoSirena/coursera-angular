@@ -13,6 +13,7 @@
         signUp.submit = function () {
             var promise = MenuService.getMenuItem(signUp.user.favDish);
             promise.then(function(response){
+                signUp.dishNotFound = false;
                 signUp.saved = true;
                 StorageService.storeData("userInfo", signUp.user, function() {
                     $timeout(function() {
@@ -21,6 +22,7 @@
                 })
             }, function(response){
                 signUp.dishNotFound = true;
+                frmSignUp.favDish.focus();
             })
                 
         }
