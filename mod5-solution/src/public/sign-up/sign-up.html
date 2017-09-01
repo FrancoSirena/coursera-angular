@@ -1,0 +1,59 @@
+<div class="container">
+    <fieldset>
+        <legend>Sign-up for our Newsletter</legend>
+        <form class="form-horizontal" name="frmSignUp"  novalidate>
+            <div class="form-group">
+                <label for="name">First name: </label>
+                <p class="text-danger" ng-if="frmSignUp.firstName.$error.required && frmSignUp.firstName.$touched">
+                        <small>First name must be informed</small>
+                </p>
+                <input type="text" name="firstName" class="form-control" placeholder="Your first name"
+                ng-model="signUp.user.firstName"
+                required>
+            </div>
+            <div class="form-group">
+                <label for="name">Last name: </label>
+                <p class="text-danger" ng-if="frmSignUp.lastName.$error.required && frmSignUp.lastName.$touched">
+                    <small>Last name must be informed</small>
+                </p>
+                <input type="text" name="lastName" class="form-control" placeholder="Your last name"
+                ng-model="signUp.user.lastName"
+                required>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail: </label>
+                <p class="text-danger" ng-if="(frmSignUp.email.$required || frmSignUp.email.$invalid) && frmSignUp.email.$touched">
+                    <small>Must be a valid email address: handle@domain format</small>
+                </p>
+                <input type="text" name="email" class="form-control" placeholder="Your e-mail"
+                ng-model="signUp.user.email"
+                required>
+            </div>
+            <div class="form-group">
+                <label for="email">Phone: </label>
+                <p class="text-danger" ng-if="(frmSignUp.phone.$required || frmSignUp.phone.$invalid) && frmSignUp.phone.$touched">
+                    <small>Must be a valid phone number</small>
+                </p>
+                <input type="text" name="phone" class="form-control" placeholder="Phone ###-###-####" ng-model="signUp.user.phone" pattern="(\d{3})-(\d{3})-(\d{4})">
+            </div>
+            <div class="form-group">
+                <label for="name">Favorite dish number: </label>    
+                <p class="text-danger"  ng-if="frmSignUp.favDish.$error.required && frmSignUp.favDish.$touched">
+                    <small>You must inform your favorite dish</small>
+                </p>                    
+                <input type="text" name="favDish" class="form-control" placeholder="Your favorite dish number"
+                ng-model="signUp.user.favDish"
+                required>
+                <small class="text-info" ng-show="signUp.dishNotFound">No such menu number exists</small>
+            </div>
+            <button
+                class="btn btn-default"
+                ng-disabled="frmSignUp.$invalid"
+                ng-click="signUp.submit()">Submit
+            </button>
+
+        </form>
+        <p class="text-success" ng-show="signUp.saved"> Your information has been saved! </p>
+    </fieldset>
+    
+</div>
